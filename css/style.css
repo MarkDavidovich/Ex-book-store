@@ -63,3 +63,9 @@ tr:nth-child(odd) {
     background-color: rgb(192, 2, 2);
     border-color: rgb(218, 73, 73);
 }
+
+.add-book-btn {
+    margin-top: 5px;
+    background-color: rgb(148, 74, 190);
+    border-color: rgb(183, 130, 214);
+}

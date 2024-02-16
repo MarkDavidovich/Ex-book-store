@@ -2,21 +2,21 @@
 
 var gBooks = [
     {
-        id: 123,
+        id: 'abc12',
         title: 'book1',
         price: 120,
         imgUrl: 'nothingATM1.jpg'
     },
 
     {
-        id: 234,
+        id: 'def23',
         title: 'book2',
         price: 200,
         imgUrl: 'nothingATM2.jpg'
     },
 
     {
-        id: 345,
+        id: 'ghi34',
         title: 'book3',
         price: 400,
         imgUrl: 'nothingATM3.jpg'
@@ -36,14 +36,30 @@ function onDeleteBook(bookId) {
 }
 
 function onUpdateBook(bookId, bookPrice) {
-    console.log('UPDATE:', bookPrice)
     const newPrice = +prompt("Enter new price:", bookPrice)
     if (newPrice !== null) updateBookPrice(bookId, newPrice)
 }
 
 function updateBookPrice(bookId, newPrice) {
-    console.log(bookId, newPrice)
     const bookToUpdate = gBooks.find(book => book.id === bookId)
     bookToUpdate.price = newPrice
+    renderBooks()
+}
+
+function onAddBook() {
+    const bookTitle = prompt('Enter a title:')
+    const bookPrice = +prompt('Enter a price:')
+
+    addNewBook(bookTitle, bookPrice)
+}
+
+function addNewBook(title, price) {
+    var newBook = {
+        id: makeId(3),
+        title,
+        price,
+        imgUrl: 'none'
+    }
+    gBooks.push(newBook)
     renderBooks()
 }
