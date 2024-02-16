@@ -8,8 +8,40 @@
     <title>Book Shop</title>
 </head>
 
-<body>
-    <script src="js/main.js"></script>
+<body onload="onInit()">
+    <h1 class="title">Book Shop</h1>
+
+    <table class="table-container">
+        <tr class="table-header">
+            <th>Title</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+            <td>Book1</td>
+            <td>120</td>
+            <td>
+                <button>read</button><button>update</button><button>delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Book2</td>
+            <td>140</td>
+            <td>
+                <button>read</button><button>update</button><button>delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Book3</td>
+            <td>300</td>
+            <td>
+                <button>read</button><button>update</button><button>delete</button>
+            </td>
+        </tr>
+    </table>
+
+    <script src="js/book.controller.js"></script>
+    <script src="js/book.service.js"></script>
 </body>
 
 </html>
