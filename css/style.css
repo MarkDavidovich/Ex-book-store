@@ -4,6 +4,17 @@
 
 button {
     cursor: pointer;
+    font-weight: bold;
+    border-radius: 8px;
+    transition-duration: 0.5s;
+    color: white;
+    margin-left: 5px;
+    height: 30px;
+}
+
+button:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
 
 body {
@@ -35,5 +46,20 @@ td {
 }
 
 tr:nth-child(odd) {
-    background-color: pink;
+    background-color: rgb(236, 236, 236);
+}
+
+.read-btn {
+    background-color: rgb(1, 124, 1);
+    border-color: rgb(67, 161, 67);
+}
+
+.update-btn {
+    background-color: rgb(0, 0, 187);
+    border-color: rgb(76, 76, 235);
+}
+
+.delete-btn {
+    background-color: rgb(192, 2, 2);
+    border-color: rgb(218, 73, 73);
 }
