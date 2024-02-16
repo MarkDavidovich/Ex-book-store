@@ -27,3 +27,16 @@ var gBooks = [
 function getBooks() {
     if (gBooks) return gBooks
 }
+
+function onDeleteBook(bookId) {
+    console.log('REMOVE:', bookId)
+    const bookIdx = gBooks.findIndex(book => book.id === bookId)
+    gBooks.splice(bookIdx, 1)
+    renderBooks()
+}
+
+function onUpdateBook(bookPrice) {
+    console.log('UPDATE:', bookPrice)
+    var currBook;
+
+}
