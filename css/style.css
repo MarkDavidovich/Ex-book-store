@@ -69,3 +69,17 @@ tr:nth-child(odd) {
     background-color: rgb(148, 74, 190);
     border-color: rgb(183, 130, 214);
 }
+
+.book-details {
+    border-radius: 5px;
+}
+
+.close-btn {
+    position: relative;
+    left: 205px;
+    bottom: 188px;
+    place-content: end;
+    background-color: red;
+    border-radius: 5px;
+    height: 25px;
+}

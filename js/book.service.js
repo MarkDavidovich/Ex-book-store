@@ -29,7 +29,6 @@ function getBooks() {
 }
 
 function onDeleteBook(bookId) {
-    console.log('REMOVE:', bookId)
     const bookIdx = gBooks.findIndex(book => book.id === bookId)
     gBooks.splice(bookIdx, 1)
     renderBooks()
@@ -62,4 +61,16 @@ function addNewBook(title, price) {
     }
     gBooks.push(newBook)
     renderBooks()
+}
+
+function onReadBook(bookId) {
+    const book = gBooks.find(book => book.id === bookId)
+    const elBookDetails = document.querySelector('.book-details')
+    const elSpan = elBookDetails.querySelector('h2 span')
+    const elPre = elBookDetails.querySelector('pre')
+
+    elSpan.innerText = book.title
+    elPre.innerText = JSON.stringify(book, null, 4)
+    elBookDetails.showModal()
+
 }
