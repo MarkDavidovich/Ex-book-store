@@ -3,22 +3,22 @@
 var gBooks = [
     {
         id: 'abc12',
-        title: 'book1',
+        title: 'Lorem Ipsum 2: the sequel',
         price: 120,
         imgUrl: 'nothingATM1.jpg'
     },
 
     {
         id: 'def23',
-        title: 'book2',
+        title: 'Programming for dummies',
         price: 200,
         imgUrl: 'nothingATM2.jpg'
     },
 
     {
         id: 'ghi34',
-        title: 'book3',
-        price: 400,
+        title: 'How to find free time during a bootcamp course',
+        price: 5000,
         imgUrl: 'nothingATM3.jpg'
     },
 
@@ -65,12 +65,17 @@ function addNewBook(title, price) {
 
 function onReadBook(bookId) {
     const book = gBooks.find(book => book.id === bookId)
-    const elBookDetails = document.querySelector('.book-details')
-    const elSpan = elBookDetails.querySelector('h2 span')
-    const elPre = elBookDetails.querySelector('pre')
+    const elBookModal = document.querySelector('.book-modal')
+    const elTitleSpan = elBookModal.querySelector('h2 span')
+    const elEtcSpan = elBookModal.querySelector('h4 span')
 
-    elSpan.innerText = book.title
-    elPre.innerText = JSON.stringify(book, null, 4)
-    elBookDetails.showModal()
+    elTitleSpan.innerText = book.title
+    elEtcSpan.innerText = book.price
 
+    elBookModal.classList.add('active')
+}
+
+function onCloseModal() {
+    const elBookModal = document.querySelector('.book-modal')
+    elBookModal.classList.remove('active')
 }

@@ -70,16 +70,30 @@ tr:nth-child(odd) {
     border-color: rgb(183, 130, 214);
 }
 
-.book-details {
-    border-radius: 5px;
+.book-modal {
+    margin-top: 2vw;
+    padding: 2vw;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 50%;
+    max-width: 400px;
+    height: 40vh;
+    background-color: rgba(0, 0, 0, 0.0);
+    transition: left 0.5s ease-in-out, opacity 0.2s ease-in-out, background-color 0.5s ease-in-out;
+    border-radius: 8px;
 }
 
 .close-btn {
-    position: relative;
-    left: 205px;
-    bottom: 188px;
-    place-content: end;
+    width: 190px;
     background-color: red;
-    border-radius: 5px;
-    height: 25px;
+}
+
+.book-modal.active {
+    display: block;
+    left: 70%;
+
+    background-color: rgba(0, 0, 0, 0.8);
 }

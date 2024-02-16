@@ -6,7 +6,11 @@ function onInit() {
 
 function renderBooks() {
 
-    const headerHTML = `<tr class="table-header"><th>Title</th><th>Price</th><th>Actions</th></tr>`
+    const headerHTML = `<tr class="table-header">
+    <th>Title</th>
+    <th>Price</th>
+    <th>Actions</th>
+    </tr>`
     const strHTMLs = gBooks.map(book => `<tr>
     <td>${book.title}</td>
     <td>${book.price}</td>
@@ -20,10 +24,3 @@ function renderBooks() {
     const elBookTable = document.querySelector('.table-container')
     elBookTable.innerHTML = headerHTML + strHTMLs.join('')
 }
-
-
-
-// function toggleModal() {
-//     const elBookModal = document.querySelector('.book-details-modal')
-//     elBookModal.classList.toggle('open')
-// }
