@@ -19,7 +19,7 @@ function renderBooks() {
     const elBookTable = document.querySelector('.table-container')
 
     if (booksToRender.length === 0) {
-        elBookTable.innerHTML = '<p class="no-books-msg">No books found matching the filter criteria.</p>'
+        elBookTable.innerHTML = '<p class="no-books-msg">No books found matching the criteria.</p>'
     } else {
 
         const strHTMLs = booksToRender.map(book => `<tr>
@@ -38,7 +38,45 @@ function renderBooks() {
     updateStatistics()
 }
 
+function onDeleteBook(bookId) {
+    deleteBook(bookId)
+    showSuccessMsg('Book deleted successfully!')
+    renderBooks()
+}
 
+function onUpdateBook(bookId, bookPrice) {
+    updateBook(bookId, bookPrice)
+    showSuccessMsg('Book updated successfully!')
+    renderBooks()
+}
+
+function onAddBook() {
+    addBook()
+    showSuccessMsg('Book added successfully!')
+    renderBooks()
+}
+
+function onReadBook(bookId) {
+    const book = gBooks.find(book => book.id === bookId)
+    const elBookModal = document.querySelector('.book-modal')
+    const elTitleSpan = elBookModal.querySelector('h2 span')
+    const elEtcSpan = elBookModal.querySelector('h4 span')
+
+    elTitleSpan.innerText = book.title
+    elEtcSpan.innerText = book.price
+
+    elBookModal.classList.add('active')
+}
+
+function onSearchChange() {
+    searchChange()
+    renderBooks()
+}
+
+function onClearSearch() {
+    clearSearch()
+    renderBooks()
+}
 
 function showSuccessMsg(message) {
     const elSuccessMsg = document.querySelector('.success-msg')
@@ -56,3 +94,16 @@ function showSuccessMsg(message) {
     }, 2000)
 }
 
+function updateStatistics() {
+    const expensiveCount = gBooks.filter(book => book.price > 200).length
+    const averageCount = gBooks.filter(book => book.price >= 80 && book.price <= 200).length
+    const cheapCount = gBooks.filter(book => book.price < 80).length
+
+    console.log('Expensive Count:', expensiveCount)
+    console.log('Average Count:', averageCount)
+    console.log('Cheap Count:', cheapCount)
+
+    document.getElementById('expensiveCount').textContent = expensiveCount
+    document.getElementById('averageCount').textContent = averageCount
+    document.getElementById('cheapCount').textContent = cheapCount
+}
