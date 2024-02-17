@@ -10,7 +10,6 @@
 
 <body onload="onInit()">
     <h1 class="title">Book Shop</h1>
-
     <section class="search-container">
         <input class="search-field" type="text" id="searchInput" placeholder="Search by title"
             oninput="onSearchChange()">
@@ -19,6 +18,8 @@
 
     <table class="table-container">
     </table>
+
+    <div class="success-msg"></div>
 
     <section class="book-modal">
         <h2><span></span></h2>
@@ -34,6 +35,13 @@
     <script src="js/local.storage.js"></script>
     <script src="js/services/book.service.js"></script>
 
+    <footer class="footer">
+        <div class="statistics">
+            Expensive: <span id="expensiveCount">0</span>
+            Average: <span id="averageCount">0</span>
+            Cheap: <span id="cheapCount">0</span>
+        </div>
+    </footer>
 </body>
 
 </html>

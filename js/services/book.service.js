@@ -2,6 +2,7 @@
 
 var gBooks = _loadBooks()
 var gFilteredBooks = gBooks
+var successMsgTimeout
 
 function getBooks() {
     return gBooks
@@ -11,6 +12,7 @@ function onDeleteBook(bookId) {
     const bookIdx = gBooks.findIndex(book => book.id === bookId)
     gBooks.splice(bookIdx, 1)
 
+    showSuccessMsg('Book deleted successfully!')
     _saveBooks(gBooks)
     renderBooks()
 }
@@ -24,6 +26,7 @@ function updateBookPrice(bookId, newPrice) {
     const bookToUpdate = gBooks.find(book => book.id === bookId)
     bookToUpdate.price = newPrice
 
+    showSuccessMsg('Book updated successfully!')
     _saveBooks(gBooks)
     renderBooks()
 }
@@ -44,6 +47,8 @@ function addNewBook(title, price) {
         imgUrl: 'none'
     }
     gBooks.push(newBook)
+
+    showSuccessMsg('Book added successfully!')
     _saveBooks(gBooks)
     renderBooks()
 }
@@ -78,3 +83,16 @@ function onCloseModal() {
     elBookModal.classList.remove('active')
 }
 
+function updateStatistics() {
+    const expensiveCount = gBooks.filter(book => book.price > 200).length
+    const averageCount = gBooks.filter(book => book.price >= 80 && book.price <= 200).length
+    const cheapCount = gBooks.filter(book => book.price < 80).length
+
+    console.log('Expensive Count:', expensiveCount)
+    console.log('Average Count:', averageCount)
+    console.log('Cheap Count:', cheapCount)
+
+    document.getElementById('expensiveCount').textContent = expensiveCount
+    document.getElementById('averageCount').textContent = averageCount
+    document.getElementById('cheapCount').textContent = cheapCount
+}
