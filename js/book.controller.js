@@ -11,7 +11,10 @@ function renderBooks() {
     <th>Price</th>
     <th>Actions</th>
     </tr>`
-    const strHTMLs = gBooks.map(book => `<tr>
+
+    const booksToRender = gFilteredBooks.length > 0 ? gFilteredBooks : gBooks
+
+    const strHTMLs = booksToRender.map(book => `<tr>
     <td>${book.title}</td>
     <td>${book.price}</td>
     <td>

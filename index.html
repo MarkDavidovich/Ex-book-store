@@ -10,6 +10,13 @@
 
 <body onload="onInit()">
     <h1 class="title">Book Shop</h1>
+
+    <section class="search-container">
+        <input class="search-field" type="text" id="searchInput" placeholder="Search by title"
+            oninput="onSearchChange()">
+        <button class="clear-btn" onclick="onClearSearch()">Clear</button>
+    </section>
+
     <table class="table-container">
     </table>
 
@@ -22,9 +29,10 @@
 
     <button class="add-book-btn" onclick="onAddBook()">Add a book</button>
 
-    <script src="js/util.service.js"></script>
+    <script src="js/services/util.service.js"></script>
     <script src="js/book.controller.js"></script>
-    <script src="js/book.service.js"></script>
+    <script src="js/local.storage.js"></script>
+    <script src="js/services/book.service.js"></script>
 
 </body>
 

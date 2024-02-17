@@ -1,36 +1,17 @@
 'use strict'
 
-var gBooks = [
-    {
-        id: 'abc12',
-        title: 'Lorem Ipsum 2: the sequel',
-        price: 120,
-        imgUrl: 'nothingATM1.jpg'
-    },
-
-    {
-        id: 'def23',
-        title: 'Programming for dummies',
-        price: 200,
-        imgUrl: 'nothingATM2.jpg'
-    },
-
-    {
-        id: 'ghi34',
-        title: 'How to find free time during a bootcamp course',
-        price: 5000,
-        imgUrl: 'nothingATM3.jpg'
-    },
-
-]
+var gBooks = _loadBooks()
+var gFilteredBooks = gBooks
 
 function getBooks() {
-    if (gBooks) return gBooks
+    return gBooks
 }
 
 function onDeleteBook(bookId) {
     const bookIdx = gBooks.findIndex(book => book.id === bookId)
     gBooks.splice(bookIdx, 1)
+
+    _saveBooks(gBooks)
     renderBooks()
 }
 
@@ -42,6 +23,8 @@ function onUpdateBook(bookId, bookPrice) {
 function updateBookPrice(bookId, newPrice) {
     const bookToUpdate = gBooks.find(book => book.id === bookId)
     bookToUpdate.price = newPrice
+
+    _saveBooks(gBooks)
     renderBooks()
 }
 
@@ -49,6 +32,7 @@ function onAddBook() {
     const bookTitle = prompt('Enter a title:')
     const bookPrice = +prompt('Enter a price:')
 
+    if (!bookTitle || !bookPrice) return
     addNewBook(bookTitle, bookPrice)
 }
 
@@ -60,6 +44,7 @@ function addNewBook(title, price) {
         imgUrl: 'none'
     }
     gBooks.push(newBook)
+    _saveBooks(gBooks)
     renderBooks()
 }
 
@@ -75,7 +60,21 @@ function onReadBook(bookId) {
     elBookModal.classList.add('active')
 }
 
+function onSearchChange() {
+    console.log('searching')
+    const searchInput = document.getElementById('searchInput').value.toLowerCase()
+    gFilteredBooks = gBooks.filter(book => book.title.toLowerCase().includes(searchInput))
+    renderBooks()
+}
+
+function onClearSearch() {
+    document.getElementById('searchInput').value = ''
+    gFilteredBooks = gBooks
+    renderBooks()
+}
+
 function onCloseModal() {
     const elBookModal = document.querySelector('.book-modal')
     elBookModal.classList.remove('active')
 }
+
