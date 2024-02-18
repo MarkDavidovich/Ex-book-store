@@ -16,7 +16,8 @@ function renderBooks() {
 
     // const books = getBooks()
 
-    const booksToRender = gFilteredBooks.length > 0 ? gFilteredBooks : []
+    const booksToRender = getBooksForCurrPage()
+
     const elBookTable = document.querySelector('.table-container')
 
     if (booksToRender.length === 0) {
@@ -26,7 +27,7 @@ function renderBooks() {
         const strHTMLs = booksToRender.map(book => `<tr>
     <td>${book.title}</td>
     <td>${book.price}</td>
-    <td>${book.rating}</td>
+    <td>${drawStars(book.rating)}</td>
     <td>
     <button onclick="onReadBook('${book.id}')"class="read-btn">Read</button>
     <button onclick="onUpdateBook('${book.id}', ${book.price})" class="update-btn">Update</button>
@@ -39,6 +40,7 @@ function renderBooks() {
     }
     updateStatistics()
     setQueryParams()
+    renderPagination()
 }
 
 function onDeleteBook(bookId) {
@@ -49,7 +51,7 @@ function onDeleteBook(bookId) {
 
 function onUpdateBook(bookId, bookPrice) {
     updateBook(bookId, bookPrice)
-    showSuccessMsg('Book updated successfully!')
+
     renderBooks()
 }
 
@@ -58,7 +60,7 @@ function onAddBook() {
     const bookPrice = +prompt('Enter a price:')
 
     addBook(bookTitle, bookPrice)
-    showSuccessMsg('Book added successfully!')
+
     renderBooks()
 }
 
@@ -142,7 +144,9 @@ function onClearFilter() {
     document.querySelector('.minRating').value = '0'
     clearSearch()
     renderBooks()
+
 }
+
 
 function setQueryParams() {
     const queryParams = new URLSearchParams()
@@ -157,7 +161,7 @@ function setQueryParams() {
     }
 
     if (gQueryOptions.page) {
-        queryParams.set('pageIdx', gQueryOptions.page.idx)
+        queryParams.set('currentPage', gQueryOptions.page.currPage)
         queryParams.set('pageSize', gQueryOptions.page.size)
     }
 
@@ -168,4 +172,35 @@ function setQueryParams() {
 
     window.history.pushState({ path: newUrl }, '', newUrl)
 
+}
+
+function getBooksForCurrPage() {
+    const booksPerPage = gQueryOptions.page.size
+    const startIdx = (gQueryOptions.page.currPage - 1) * booksPerPage
+    const endIdx = startIdx + booksPerPage
+    return gFilteredBooks.slice(startIdx, endIdx)
+}
+
+function onNextPage() {
+    const totalPages = Math.ceil(gFilteredBooks.length / gQueryOptions.page.size)
+    if (gQueryOptions.page.currPage < totalPages) {
+        gQueryOptions.page.currPage++
+        renderBooks()
+    }
+}
+
+function onPrevPage() {
+    if (gQueryOptions.page.currPage > 1) {
+        gQueryOptions.page.currPage--
+        renderBooks()
+    }
+}
+
+function renderPagination() {
+    const totalPages = Math.ceil(gFilteredBooks.length / gQueryOptions.page.size)
+    const elPagination = document.querySelector('.pagination-container')
+    if (gQueryOptions.page.currPage === 1) {
+        elPrevBtn = elPagination.querySelector('.prev-btn')
+        elPrevBtn.disabled = 'true'
+    }
 }

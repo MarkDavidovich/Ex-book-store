@@ -7,7 +7,13 @@ var gSortToggle = { isTitleDescending: true, isPriceDescending: true, isRatingDe
 var gQueryOptions = {
     filterBy: { txt: '', rating: 0 },
     sortBy: {},
-    page: { idx: 0, size: 3 }
+    page: { currPage: 1, size: 5 }
+}
+var gSortToggle = { isTitleDescending: true, isPriceDescending: true }
+var gQueryOptions = {
+    filterBy: { txt: '', rating: 0 },
+    // sortBy: {},
+    // page: {idx:0, size: 3}
 }
 
 function getBooks() {
@@ -23,7 +29,9 @@ function deleteBook(bookId) {
 
 function updateBook(bookId, bookPrice) {
     const newPrice = +prompt("Enter new price:", bookPrice)
-    if (newPrice !== null) updateBookPrice(bookId, newPrice)
+    if (newPrice === null || newPrice === 0) return
+    updateBookPrice(bookId, newPrice)
+    showSuccessMsg('Book updated successfully!')
 }
 
 function updateBookPrice(bookId, newPrice) {
@@ -37,6 +45,7 @@ function addBook(title, price) {
     if (!title || !price) return
     const newBook = _createBook(title, price)
     gBooks.push(newBook)
+    showSuccessMsg('Book added successfully!')
 
     _saveBooks(gBooks)
 }
@@ -118,13 +127,12 @@ function sortBooks(criteria) {
 
 function drawStars(rating) {
     const star = '⭐'
-    var starsStr = ''
-    for (let i = 0; i < rating; i++) {
-        starsStr += star
-    }
-    return starsStr
+    return star.repeat(rating)
 }
 
+// function renderStars(rating) {
+
+// }
 
 function filterBooks(books) {
     return books.filter(book => {
