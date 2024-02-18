@@ -3,7 +3,7 @@
 var gBooks = _createBooks(6)
 var gFilteredBooks = gBooks // This needs to be changed to work in getBooks
 var gSuccessMsgTimeout
-var gSortToggle = { isTitleDescending: true, isPriceDescending: true }
+var gSortToggle = { isTitleDescending: true, isPriceDescending: true, isRatingDescending: true }
 var gQueryOptions = {
     filterBy: { txt: '', rating: 0 },
     sortBy: {},
@@ -101,9 +101,19 @@ function sortBooks(criteria) {
                 return gSortToggle.isPriceDescending ? b.price - a.price : a.price - b.price
             })
             break
+        case 'rating':
+            gFilteredBooks.sort((a, b) => {
+                return gSortToggle.isRatingDescending ? b.rating - a.rating : a.rating - b.rating
+            })
+            break
     }
-
-    criteria === 'title' ? gSortToggle.isTitleDescending = !gSortToggle.isTitleDescending : gSortToggle.isPriceDescending = !gSortToggle.isPriceDescending
+    if (criteria === 'title') {
+        gSortToggle.isTitleDescending = !gSortToggle.isTitleDescending
+    } else if (criteria === 'price') {
+        gSortToggle.isPriceDescending = !gSortToggle.isPriceDescending
+    } else {
+        gSortToggle.isRatingDescending = !gSortToggle.isRatingDescending
+    }
 }
 
 function drawStars(rating) {
