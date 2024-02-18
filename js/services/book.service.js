@@ -27,15 +27,8 @@ function updateBookPrice(bookId, newPrice) {
     _saveBooks(gBooks)
 }
 
-function addBook() {
-    const bookTitle = prompt('Enter a title:')
-    const bookPrice = +prompt('Enter a price:')
-
-    if (!bookTitle || !bookPrice) return
-    addNewBook(bookTitle, bookPrice)
-}
-
-function addNewBook(title, price) {
+function addBook(title, price) {
+    if (!title || !price) return
     var newBook = {
         id: makeId(3),
         title,
@@ -56,7 +49,4 @@ function clearSearch() {
     gFilteredBooks = gBooks
 }
 
-function onCloseModal() {
-    const elBookModal = document.querySelector('.book-modal')
-    elBookModal.classList.remove('active')
-}
+

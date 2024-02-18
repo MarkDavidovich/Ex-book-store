@@ -51,7 +51,10 @@ function onUpdateBook(bookId, bookPrice) {
 }
 
 function onAddBook() {
-    addBook()
+    const bookTitle = prompt('Enter a title:')
+    const bookPrice = +prompt('Enter a price:')
+
+    addBook(bookTitle, bookPrice)
     showSuccessMsg('Book added successfully!')
     renderBooks()
 }
@@ -77,6 +80,7 @@ function onClearSearch() {
     clearSearch()
     renderBooks()
 }
+
 
 function showSuccessMsg(message) {
     const elSuccessMsg = document.querySelector('.success-msg')
@@ -106,4 +110,9 @@ function updateStatistics() {
     document.getElementById('expensiveCount').textContent = expensiveCount
     document.getElementById('averageCount').textContent = averageCount
     document.getElementById('cheapCount').textContent = cheapCount
+}
+
+function onCloseModal() {
+    const elBookModal = document.querySelector('.book-modal')
+    elBookModal.classList.remove('active')
 }
