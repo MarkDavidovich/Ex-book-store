@@ -7,8 +7,6 @@ function onInit() {
 }
 
 function renderBooks() {
-
-
     const headerHTML = `<tr class="table-header">
     <th>Title</th>
     <th>Price</th>
