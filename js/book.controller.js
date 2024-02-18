@@ -2,16 +2,18 @@
 
 function onInit() {
     updateStatistics()
-    clearTimeout(successMsgTimeout)
+    clearTimeout(gSuccessMsgTimeout)
     renderBooks()
 }
 
 function renderBooks() {
     const headerHTML = `<tr class="table-header">
-    <th>Title</th>
-    <th>Price</th>
+    <th onclick="onSortBooks('title')">Title <span class="title-plus">+</span><span class="title-minus">-</span></th>
+    <th onclick="onSortBooks('price')">Price <span class="price-plus">+</span><span class="price-minus">-</span></th>
     <th>Actions</th>
     </tr>`
+
+    // const books = getBooks()
 
     const booksToRender = gFilteredBooks.length > 0 ? gFilteredBooks : []
     const elBookTable = document.querySelector('.table-container')
@@ -86,14 +88,13 @@ function showSuccessMsg(message) {
     elSuccessMsg.innerText = message
     elSuccessMsg.style.display = 'block'
 
-    if (successMsgTimeout) {
-        clearTimeout(successMsgTimeout);
+    if (gSuccessMsgTimeout) {
+        clearTimeout(gSuccessMsgTimeout);
     }
 
-    successMsgTimeout = setTimeout(() => {
+    gSuccessMsgTimeout = setTimeout(() => {
         elSuccessMsg.style.display = 'none'
-        console.log('disappears')
-    }, 2000)
+    }, 1500)
 }
 
 function updateStatistics() {
@@ -113,4 +114,11 @@ function updateStatistics() {
 function onCloseModal() {
     const elBookModal = document.querySelector('.book-modal')
     elBookModal.classList.remove('active')
+}
+
+//Book shop II
+
+function onSortBooks(criteria) {
+    sortBooks(criteria)
+    renderBooks()
 }
