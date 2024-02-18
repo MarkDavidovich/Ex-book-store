@@ -4,6 +4,11 @@ var gBooks = _createBooks(6)
 var gFilteredBooks = gBooks // This needs to be changed to work in getBooks
 var gSuccessMsgTimeout
 var gSortToggle = { isTitleDescending: true, isPriceDescending: true }
+var gQueryOptions = {
+    filterBy: { txt: '', rating: 0 },
+    // sortBy: {},
+    // page: {idx:0, size: 3}
+}
 
 function getBooks() {
     return gBooks
@@ -38,9 +43,14 @@ function addBook(title, price) {
 
 function searchChange() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase()
-    gFilteredBooks = gBooks.filter(book => book.title.toLowerCase().includes(searchInput))
-}
+    gFilteredBooks = gBooks.filter(book => {
+        const titleMatches = book.title.toLowerCase().includes(searchInput)
+        const ratingMatches = book.rating >= gQueryOptions.filterBy.rating
+        return titleMatches && ratingMatches
+    })
 
+    renderBooks()
+}
 function clearSearch() {
     document.getElementById('searchInput').value = ''
     gFilteredBooks = gBooks
@@ -78,10 +88,6 @@ function _createBook(title, price, imgUrl) {
 
 function sortBooks(criteria) {
 
-    // const elTitlePlus = document.querySelector('.title-plus')
-    // const elTitleMinus = document.querySelector('.title-minus')
-    // const elPricePlus = document.querySelector('.price-plus')
-    // const elPriceMinus = document.querySelector('.price-minus')
     switch (criteria) {
         case 'title':
             gFilteredBooks.sort((a, b) => {
@@ -96,16 +102,7 @@ function sortBooks(criteria) {
             })
             break
     }
-    // if (criteria === 'title' && gSortToggle.isTitleDescending) {
-    //     console.log('color changed!')
-    //     elTitlePlus.classList.add('red')
-    //     elTitleMinus.classList.remove('red')
-    // }
-    // else if (criteria === 'title' && !gSortToggle.isTitleDescending) {
-    //     elTitleMinus.classList.add('red')
-    //     elTitlePlus.classList.remove('red')
-    // }
-    // NEED TO CHANGE THE MODEL!
+
     criteria === 'title' ? gSortToggle.isTitleDescending = !gSortToggle.isTitleDescending : gSortToggle.isPriceDescending = !gSortToggle.isPriceDescending
 }
 
@@ -116,4 +113,17 @@ function drawStars(rating) {
         starsStr += star
     }
     return starsStr
+}
+
+
+function filterBooks(books) {
+    return books.filter(book => {
+        const titleMatch = book.title.toLowerCase().includes(gQueryOptions.filterBy.txt.toLowerCase())
+        const ratingMatch = book.rating >= gQueryOptions.filterBy.rating
+
+        console.log(`Book: ${book.title}, Title Matches: ${titleMatch}, Rating Matches: ${ratingMatch}`)
+
+        return titleMatch && ratingMatch
+    })
+
 }

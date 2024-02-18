@@ -10,6 +10,19 @@
 
 <body onload="onInit()">
     <h1 class="title">Book Shop</h1>
+
+    <section class="filter-container">
+        <select class="minRating" onchange="onFilterBooks()">
+            <option value="0">Select Minimum Rating</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <button class="clear-btn" onclick="onClearFilter()">Clear</button>
+    </section>
+
     <section class="search-container">
         <input class="search-field" type="text" id="searchInput" placeholder="Search by title"
             oninput="onSearchChange()">

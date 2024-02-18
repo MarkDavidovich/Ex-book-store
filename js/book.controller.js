@@ -76,6 +76,7 @@ function onReadBook(bookId) {
 }
 
 function onSearchChange() {
+    filterBooks(gBooks)
     searchChange()
     renderBooks()
 }
@@ -106,10 +107,6 @@ function updateStatistics() {
     const averageCount = gBooks.filter(book => book.price >= 80 && book.price <= 200).length
     const cheapCount = gBooks.filter(book => book.price < 80).length
 
-    console.log('Expensive Count:', expensiveCount)
-    console.log('Average Count:', averageCount)
-    console.log('Cheap Count:', cheapCount)
-
     document.getElementById('expensiveCount').textContent = expensiveCount
     document.getElementById('averageCount').textContent = averageCount
     document.getElementById('cheapCount').textContent = cheapCount
@@ -125,4 +122,24 @@ function onCloseModal() {
 function onSortBooks(criteria) {
     sortBooks(criteria)
     renderBooks()
+}
+
+function onFilterBooks() {
+    const title = document.querySelector('#searchInput').value.toLowerCase()
+    const minRating = +document.querySelector('.minRating').value
+
+    gQueryOptions.filterBy.txt = title
+    gQueryOptions.filterBy.rating = minRating
+
+
+    gFilteredBooks = filterBooks(gBooks)
+    renderBooks()
+}
+
+function onClearFilter() {
+    document.querySelector('#searchInput').value = ''
+    document.querySelector('.minRating').value = '0'
+    clearSearch()
+    renderBooks()
+
 }
