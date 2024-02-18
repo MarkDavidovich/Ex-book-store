@@ -38,6 +38,7 @@ function renderBooks() {
         elBookTable.innerHTML = headerHTML + strHTMLs.join('')
     }
     updateStatistics()
+    setQueryParams()
 }
 
 function onDeleteBook(bookId) {
@@ -141,4 +142,30 @@ function onClearFilter() {
     document.querySelector('.minRating').value = '0'
     clearSearch()
     renderBooks()
+}
+
+function setQueryParams() {
+    const queryParams = new URLSearchParams()
+
+    queryParams.set('title', gQueryOptions.filterBy.txt)
+    queryParams.set('rating', gQueryOptions.filterBy.rating)
+
+    const sortKeys = Object.keys(gQueryOptions.sortBy)
+    if (sortKeys.length) {
+        queryParams.set('sortBy', sortKeys[0])
+        queryParams.set('sortDir', gQueryOptions.sortBy[sortKeys[0]])
+    }
+
+    if (gQueryOptions.page) {
+        queryParams.set('pageIdx', gQueryOptions.page.idx)
+        queryParams.set('pageSize', gQueryOptions.page.size)
+    }
+
+    const newUrl =
+        window.location.protocol + "//" +
+        window.location.host +
+        window.location.pathname + '?' + queryParams.toString()
+
+    window.history.pushState({ path: newUrl }, '', newUrl)
+
 }

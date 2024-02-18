@@ -6,8 +6,8 @@ var gSuccessMsgTimeout
 var gSortToggle = { isTitleDescending: true, isPriceDescending: true }
 var gQueryOptions = {
     filterBy: { txt: '', rating: 0 },
-    // sortBy: {},
-    // page: {idx:0, size: 3}
+    sortBy: {},
+    page: { idx: 0, size: 3 }
 }
 
 function getBooks() {
@@ -48,7 +48,7 @@ function searchChange() {
         const ratingMatches = book.rating >= gQueryOptions.filterBy.rating
         return titleMatches && ratingMatches
     })
-
+    gQueryOptions.filterBy.txt = searchInput
     renderBooks()
 }
 function clearSearch() {
@@ -127,3 +127,4 @@ function filterBooks(books) {
     })
 
 }
+
