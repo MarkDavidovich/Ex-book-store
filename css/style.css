@@ -181,3 +181,18 @@ tr:nth-child(even) {
 .red {
     color: red;
 }
+
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.prev-btn {
+    background-color: rgb(255, 140, 0);
+    border-color: rgb(255, 181, 90);
+}
+
+.next-btn {
+    background-color: rgb(255, 140, 0);
+    border-color: rgb(255, 181, 90);
+}
