@@ -8,9 +8,9 @@ function onInit() {
 
 function renderBooks() {
     const headerHTML = `<tr class="table-header">
-    <th onclick="onSortBooks('title')">Title <span class="title-plus">+</span><span class="title-minus">-</span></th>
-    <th onclick="onSortBooks('price')">Price <span class="price-plus">+</span><span class="price-minus">-</span></th>
-    <th onclick="onSortBooks('rating')">Rating <span class="rating-plus">+</span><span class="rating-minus">-</span></th>
+    <th class="table-title" onclick="onSortBooks('title')">Title </th>
+    <th class="table-price" onclick="onSortBooks('price')">Price </th>
+    <th class="table-rating" onclick="onSortBooks('rating')">Rating </th>
     <th>Actions</th>
     </tr>`
 
@@ -122,7 +122,20 @@ function onCloseModal() {
 //Book shop II
 
 function onSortBooks(criteria) {
+    // const elTitle = document.querySelector('.table-title')
+    // const elPrice = document.querySelector('.table-price')
+    // const elRating = document.querySelector('.table-rating')
     sortBooks(criteria)
+    // if (criteria === 'title') {
+    //     elTitle.innerText += ' +'
+    // }
+    // if (criteria === 'price') {
+    //     elPrice.innerText += ' +'
+    // }
+    // if (criteria === 'rating') {
+    //     elRating.innerText += ' +'
+    // }
+
     renderBooks()
 }
 
@@ -184,14 +197,19 @@ function onNextPage() {
     const totalPages = Math.ceil(gFilteredBooks.length / gQueryOptions.page.size)
     if (gQueryOptions.page.currPage < totalPages) {
         gQueryOptions.page.currPage++
-        renderBooks()
+    } else {
+        gQueryOptions.page.currPage = 1;
     }
+    renderBooks()
 }
 
 function onPrevPage() {
+    const totalPages = Math.ceil(gFilteredBooks.length / gQueryOptions.page.size)
     if (gQueryOptions.page.currPage > 1) {
         gQueryOptions.page.currPage--
-        renderBooks()
+    } else {
+        gQueryOptions.page.currPage = totalPages;
     }
+    renderBooks()
 }
 

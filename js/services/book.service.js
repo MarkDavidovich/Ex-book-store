@@ -91,7 +91,6 @@ function _createBook(title, price, imgUrl) {
 //Book shop 2
 
 function sortBooks(criteria) {
-
     switch (criteria) {
         case 'title':
             gFilteredBooks.sort((a, b) => {
@@ -125,10 +124,6 @@ function drawStars(rating) {
     return star.repeat(rating)
 }
 
-// function renderStars(rating) {
-
-// }
-
 function filterBooks(books) {
     return books.filter(book => {
         const titleMatch = book.title.toLowerCase().includes(gQueryOptions.filterBy.txt.toLowerCase())
@@ -138,6 +133,5 @@ function filterBooks(books) {
 
         return titleMatch && ratingMatch
     })
-
 }
 

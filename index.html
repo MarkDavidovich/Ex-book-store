@@ -30,7 +30,14 @@
     </section>
 
     <table class="table-container">
-        <!-- <thead></thead> -->
+        <thead>
+            <tr class="table-header">
+                <th class="table-title" onclick="onSortBooks('title')">Title </th>
+                <th class="table-price" onclick="onSortBooks('price')">Price </th>
+                <th class="table-rating" onclick="onSortBooks('rating')">Rating </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
         <!-- <tbody></tbody> -->
     </table>
 
@@ -47,8 +54,8 @@
     <button class="add-book-btn" onclick="onAddBook()">Add a book</button>
 
     <div class="pagination-container">
-        <button class="prev-btn" onclick="onPrevPage()">Prev</button>
-        <button class="next-btn" onclick="onNextPage()">Next</button>
+        <button class="prev-btn" onclick="onPrevPage()">◄</button>
+        <button class="next-btn" onclick="onNextPage()">►</button>
     </div>
 
     <div class="page-num">
