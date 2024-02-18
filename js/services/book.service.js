@@ -10,11 +10,6 @@ var gQueryOptions = {
     page: { currPage: 1, size: 5 }
 }
 var gSortToggle = { isTitleDescending: true, isPriceDescending: true }
-var gQueryOptions = {
-    filterBy: { txt: '', rating: 0 },
-    // sortBy: {},
-    // page: {idx:0, size: 3}
-}
 
 function getBooks() {
     return gBooks

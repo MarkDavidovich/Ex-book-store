@@ -40,7 +40,6 @@ function renderBooks() {
     }
     updateStatistics()
     setQueryParams()
-    renderPagination()
 }
 
 function onDeleteBook(bookId) {
@@ -196,11 +195,3 @@ function onPrevPage() {
     }
 }
 
-function renderPagination() {
-    const totalPages = Math.ceil(gFilteredBooks.length / gQueryOptions.page.size)
-    const elPagination = document.querySelector('.pagination-container')
-    if (gQueryOptions.page.currPage === 1) {
-        elPrevBtn = elPagination.querySelector('.prev-btn')
-        elPrevBtn.disabled = 'true'
-    }
-}
