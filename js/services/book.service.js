@@ -70,7 +70,7 @@ function _createBook(title, price, imgUrl) {
         title,
         price,
         imgUrl: imgUrl || 'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg',
-        rating: 0,
+        rating: getRandomIntInclusive(1, 5)
     }
 }
 
@@ -107,4 +107,13 @@ function sortBooks(criteria) {
     // }
     // NEED TO CHANGE THE MODEL!
     criteria === 'title' ? gSortToggle.isTitleDescending = !gSortToggle.isTitleDescending : gSortToggle.isPriceDescending = !gSortToggle.isPriceDescending
+}
+
+function drawStars(rating) {
+    const star = '⭐'
+    var starsStr = ''
+    for (let i = 0; i < rating; i++) {
+        starsStr += star
+    }
+    return starsStr
 }

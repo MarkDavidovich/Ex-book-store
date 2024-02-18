@@ -10,6 +10,7 @@ function renderBooks() {
     const headerHTML = `<tr class="table-header">
     <th onclick="onSortBooks('title')">Title <span class="title-plus">+</span><span class="title-minus">-</span></th>
     <th onclick="onSortBooks('price')">Price <span class="price-plus">+</span><span class="price-minus">-</span></th>
+    <th onclick="onSortBooks('rating')">Rating <span class="rating-plus">+</span><span class="rating-minus">-</span></th>
     <th>Actions</th>
     </tr>`
 
@@ -25,6 +26,7 @@ function renderBooks() {
         const strHTMLs = booksToRender.map(book => `<tr>
     <td>${book.title}</td>
     <td>${book.price}</td>
+    <td>${book.rating}</td>
     <td>
     <button onclick="onReadBook('${book.id}')"class="read-btn">Read</button>
     <button onclick="onUpdateBook('${book.id}', ${book.price})" class="update-btn">Update</button>
@@ -63,10 +65,12 @@ function onReadBook(bookId) {
     const book = gBooks.find(book => book.id === bookId)
     const elBookModal = document.querySelector('.book-modal')
     const elTitleSpan = elBookModal.querySelector('h2 span')
-    const elEtcSpan = elBookModal.querySelector('h4 span')
+    const elEtcSpan = elBookModal.querySelector('h3 span')
+    const elRatingSpan = elBookModal.querySelector('h4 span')
 
     elTitleSpan.innerText = book.title
     elEtcSpan.innerText = book.price
+    elRatingSpan.innerText = drawStars(book.rating)
 
     elBookModal.classList.add('active')
 }
